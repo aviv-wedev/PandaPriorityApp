@@ -12,9 +12,4 @@ const shopify = shopifyApi({
 const session = new Session({ accessToken: process.env.ADMIN_API_KEY, shop: process.env.SHOP });
 const client = new shopify.clients.Rest({ session: session, apiVersion: ApiVersion.January23 });
 
-client
-	.get({
-		path: 'products',
-	})
-	.then((res) => console.log(res));
 module.exports = client;

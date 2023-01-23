@@ -2,8 +2,9 @@ require('dotenv').config();
 const express = require('express');
 const app = express();
 const http = require('http').Server(app);
+const priorityRouter = require('./routes/priority');
 require('./assets/errorHandlers');
-require('./assets/client');
+
 //AWS health check
 app.get('/isalive', (req, res) => {
 	res.send('OK');
@@ -11,6 +12,8 @@ app.get('/isalive', (req, res) => {
 
 app.use(require('morgan')('dev'));
 app.use(express.json());
+
+app.use('/api/priority', priorityRouter);
 
 app.all('*', (req, res) => {
 	res.status(404).send('not found');
